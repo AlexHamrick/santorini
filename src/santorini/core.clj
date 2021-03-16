@@ -71,6 +71,9 @@
       (vec (take 2 reduced-ideal)))
     [[3 2] [4 4]]))
 
+(defn is-a-win 
+  [])
+
 (defn move-to-json
   [move board players turn]
   (let [turnmap (assoc {} "turn" (inc turn))
