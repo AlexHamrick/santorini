@@ -5,7 +5,6 @@
 ; Happy coding! ♥️
 
 ; Jacking in...
-; nREPL Connection was closed
 ; Starting Jack-in Terminal: cmd.exe /d /c lein update-in :dependencies conj [nrepl,"0.8.3"] -- update-in :plugins conj [cider/cider-nrepl,"0.25.8"] -- update-in [:repl-options,:nrepl-middleware] conj '["cider.nrepl/cider-middleware"]' -- repl :headless
 ; Hooking up nREPL sessions...
 ; Connected session: clj
@@ -18,4 +17,46 @@
 ;   - Clojure lines in stack traces are peekable and clickable.
 clj꞉santorini.core꞉> 
 ; Jack-in done.
+clj꞉santorini.core꞉> 
+(-main)
+[{"card":"Artemis","tokens":[[2,3],[4,4]]},{"card":"Prometheus","tokens":[[3,2],[4,3]]}]
+; Execution error (IllegalStateException) at santorini.core/create-new-players (core.clj:159).
+; Attempting to call unbound fn: #'santorini.core/get-selected-token
+clj꞉santorini.core꞉> 
+(main-loop)
+; Execution error (IllegalStateException) at santorini.core/create-new-players (core.clj:159).
+; Attempting to call unbound fn: #'santorini.core/get-selected-token
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+(main-loop)
+; Execution error (IllegalStateException) at santorini.core/create-new-board (core.clj:143).
+; Attempting to call unbound fn: #'santorini.core/get-move-height
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+bld1
+; Syntax error compiling at (c:\Users\Alex\FunctionalProgramming\santorini\.calva\output-window\output.calva-repl:1:7962).
+; Unable to resolve symbol: bld1 in this context
+clj꞉santorini.core꞉> 
+Build
+santorini.core.Build
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+Build
+santorini.core.Build
+clj꞉santorini.core꞉> 
+(main-loop)
+{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Artemis","tokens":[[3,4],[4,4]]}],"spaces":[[0,0,0,0,2],[1,1,2,0,0],[1,0,0,3,0],[0,0,3,0,0],[0,0,0,1,4]]}
+nil
 clj꞉santorini.core꞉> 
