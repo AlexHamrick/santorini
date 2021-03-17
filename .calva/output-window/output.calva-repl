@@ -91,3 +91,9 @@ No input provided.
 ; Execution error (NullPointerException) at santorini.core/move-to-json (core.clj:223).
 ; Cannot invoke "Object.getClass()" because "x" is null
 clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 

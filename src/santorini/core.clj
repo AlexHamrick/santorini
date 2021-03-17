@@ -13,7 +13,7 @@
          create-new-players
          pick-move
          compare-moves
-         take-turn
+         take-turn-generic
          has-won?
          define-blank-move
          get-valid-moves
@@ -51,7 +51,7 @@
         tokens (u/get-tokens-from-map players)
         cards (u/get-cards-from-map players)
         player-card (first cards)
-        options (take-turn board tokens player-card)
+        options (take-turn-generic board tokens player-card)
         move (pick-move options)
         result (move-to-json move board players turn)
         newjson (cheshire/generate-string result)]
@@ -118,7 +118,9 @@
     ;; c1
     ))
 
-(defn take-turn
+;; (defn take-)
+
+(defn take-turn-generic
   [board players card]
   (let [res (for [pos (range 2)
                   :let [start-move (define-blank-move board players pos card)
