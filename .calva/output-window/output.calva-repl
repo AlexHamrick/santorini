@@ -60,3 +60,100 @@ clj꞉santorini.core꞉> 
 {"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Artemis","tokens":[[3,4],[4,4]]}],"spaces":[[0,0,0,0,2],[1,1,2,0,0],[1,0,0,3,0],[0,0,3,0,0],[0,0,0,1,4]]}
 nil
 clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+; Evaluating file: records.clj
+nil
+clj꞉santorini.records꞉> 
+; Evaluating file: records.clj
+santorini.records.Build
+clj꞉santorini.records꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+; Evaluating file: utils.clj
+#'utils/get-cards-from-map
+clj꞉utils꞉> 
+; Evaluating file: utils.clj
+#'utils/get-cards-from-map
+clj꞉utils꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+; Evaluating file: utils.clj
+#'utils/get-cards-from-map
+clj꞉utils꞉> 
+; Evaluating file: core.clj
+; Syntax error compiling at (C:\Users\Alex\FunctionalProgramming\santorini\src\santorini\core.clj:1:1).
+; namespace 'santorini.utils' not found after loading '/santorini/utils'
+; Evaluation of file core.clj failed: class clojure.lang.Compiler$CompilerException
+
+clj꞉utils꞉> 
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+; Syntax error compiling at (C:\Users\Alex\FunctionalProgramming\santorini\src\santorini\core.clj:1:1).
+; namespace 'santorini.utils' not found after loading '/santorini/utils'
+; Evaluation of file core.clj failed: class clojure.lang.Compiler$CompilerException
+
+clj꞉santorini.core꞉> 
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+; Syntax error compiling at (C:\Users\Alex\FunctionalProgramming\santorini\src\santorini\core.clj:1:1).
+; namespace 'santorini.utils' not found
+; Evaluation of file core.clj failed: class clojure.lang.Compiler$CompilerException
+
+clj꞉santorini.core꞉> 
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+; Syntax error compiling at (C:\Users\Alex\FunctionalProgramming\santorini\src\santorini\core.clj:1:1).
+; namespace 'santorini.utils' not found
+; Evaluation of file core.clj failed: class clojure.lang.Compiler$CompilerException
+
+clj꞉santorini.core꞉> 
+clj꞉santorini.core꞉> 
+(-main)
+[{"card":"Prometheus"},{"card":"Artemis","tokens":[[3,2],[4,4]]}]
+{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Artemis","tokens":[[3,4],[4,4]]}],"spaces":[[0,0,0,0,2],[1,1,2,0,0],[1,0,0,3,0],[0,0,3,0,0],[0,0,0,1,4]]}
+; Evaluating file: core.clj
+; Evaluating file: core.clj
+; Evaluating file: core.clj
+; Evaluating file: core.clj
+; Evaluating file: utils.clj
+No input provided.
+; Execution error (NullPointerException) at santorini.core/move-to-json (core.clj:371).
+; Cannot invoke "Object.getClass()" because "x" is null
+clj꞉santorini.core꞉> 
+; Syntax error (IllegalAccessError) compiling at (C:\Users\Alex\FunctionalProgramming\santorini\src\santorini\core.clj:1:1).
+; ->Move does not exist
+; Evaluation of file core.clj failed: class clojure.lang.Compiler$CompilerException
+
+clj꞉santorini.core꞉> 
+clj꞉santorini.core꞉> 
+#'santorini.utils/get-cards-from-map
+clj꞉santorini.utils꞉> 
+; Syntax error (IllegalStateException) compiling at (C:\Users\Alex\FunctionalProgramming\santorini\src\santorini\core.clj:1:1).
+; Alias u already exists in namespace santorini.core, aliasing santorini.utils
+; Evaluation of file core.clj failed: class clojure.lang.Compiler$CompilerException
+
+clj꞉santorini.utils꞉> 
+clj꞉santorini.core꞉> 
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
