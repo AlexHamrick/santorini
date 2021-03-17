@@ -26,7 +26,7 @@
 
 (defn get-move-pieceStart
   [move]
-  (:pieces move))
+  (:pieceStart move))
 
 (defn get-move-startHeight
   [move]
@@ -87,6 +87,14 @@
 (defn set-move-card
   [move card]
   (assoc move :card card))
+
+(defn set-build-pos
+  [build pos]
+  (assoc build :pos pos))
+
+(defn set-build-newHeight
+  [build newHeight]
+  (assoc build :newHeight newHeight))
 
 (defn append-build
   [move build]

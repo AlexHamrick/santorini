@@ -22,3 +22,13 @@
 
 
    {"players":[{"card":"Pan","tokens":[[2,3],[5,5]]},                {"card":"Prometheus","tokens":[[2,5],[3,5]]}],     "spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,3,2]],     "turn":18}
+
+
+   {"players":[{"card":"Artemis","tokens":[[2,3],[5,5]]},                {"card":"Prometheus","tokens":[[2,5],[3,5]]}],     "spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,3,0,0],[0,0,0,2,0],[0,0,0,0,2]],     "turn":18}
+
+   {"players":[{"card":"Atlas","tokens":[[2,3],[5,5]]},                {"card":"Prometheus","tokens":[[2,5],[3,5]]}],     "spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,2,0],[0,0,0,0,2]],     "turn":18}
+
+   {"players":[{"card":"Hephastus","tokens":[[3,2],[4,4]]},{"card":"Demeter","tokens":[[3,3],[4,1]]}],"spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,1,0,0,0],[0,1,0,0,0]],"style":{"players":["play-random","runable.sh"]},"turn":1}
+
+
+[{"card":"Demeter"},{"card":"Hephastus"}]

@@ -13,7 +13,11 @@
          create-new-players
          pick-move
          compare-moves
+         take-turn
          take-turn-generic
+         artemis-turn
+         atlas-turn
+         hephastus-turn
          has-won?
          define-blank-move
          get-valid-moves
@@ -51,7 +55,7 @@
         tokens (u/get-tokens-from-map players)
         cards (u/get-cards-from-map players)
         player-card (first cards)
-        options (take-turn-generic board tokens player-card)
+        options (take-turn board tokens player-card)
         move (pick-move options)
         result (move-to-json move board players turn)
         newjson (cheshire/generate-string result)]
@@ -72,10 +76,17 @@
   [board move]
   ;; (if (< (u/get-move-currentHeight move) 3)
     (let [build (get (u/get-move-builds move) 0)]
-      (if (nil? build)
+      (if (or (nil? build)
+              (empty? build))
         board
-        (assoc-in board (vec (map dec (u/get-build-pos build)))
-                (inc (u/get-build-newHeight build)))
+        (let [bpos (u/get-build-pos build)] 
+          (println move)
+             (println build)
+             (println bpos)
+             (assoc-in board (vec (map dec bpos))
+                       (u/get-build-newHeight build))
+          ;; ]
+             )
         ))
     ;; board)
   )
@@ -94,10 +105,12 @@
 
 (defn pick-move
   [moves]
-  (get (vec (sort compare-moves (vec moves))) 0))
+  (rand-nth (vec (sort compare-moves (vec moves)))))
+  ;; (get (vec (sort compare-moves (vec moves))) 0))
 
 (defn compare-moves
   [move1 move2]
+  ;; (println move1 move2)
   (let [mh1 (u/get-move-currentHeight move1)
         mh2 (u/get-move-currentHeight move2)
         win1 (has-won? move1 (u/get-move-card move1))
@@ -118,7 +131,63 @@
     ;; c1
     ))
 
-;; (defn take-)
+(defn take-turn 
+  [board players card]
+  (if (= card "Artemis")
+    (artemis-turn board players card)
+    (let [generic (take-turn-generic board players card)]
+      (if (= card "Atlas")
+        (vec (concat generic (atlas-turn generic)))
+        (if (= card "Hephastus")
+          (vec (concat generic (hephastus-turn generic)))
+          generic))
+      ))
+    ;;if we are none of the specified cards
+  )
+
+;;TODO test that atlas doesn't mess up when there are no builds
+(defn atlas-turn
+  [moves]
+  (let [new-heights (for [mv moves]
+                      (let [builds (u/get-move-builds mv)]
+                        (when (and (seq builds)
+                                   (< (u/get-build-newHeight (first builds))  4))
+                          (u/set-move-builds mv [(u/set-build-newHeight
+                                                 (first builds) 4)]
+                          ))))]
+    (remove nil? (vec new-heights))
+    )
+  )
+
+(defn hephastus-turn
+  [moves]
+  (let [new-heights (for [mv moves]
+                      (let [builds (u/get-move-builds mv)]
+                        (when (and (seq builds)
+                                   (< (u/get-build-newHeight (first builds))  3))
+                          (u/set-move-builds mv [(u/set-build-newHeight
+                                                  (first builds)
+                                                  (inc (u/get-build-newHeight (first builds))))]
+                          ))))]
+    (remove nil? (vec new-heights))))
+
+
+(defn artemis-turn 
+  [board players card]
+    (let [res (for [pos (range 2)
+                  :let [start-move (define-blank-move board players pos card)
+                        moves (for [mv1 (get-valid-moves board start-move)
+                                    mv2 (get-valid-moves board mv1)
+                                    build (get-valid-builds board mv2)]
+                                (if (has-won? mv1 card)
+                                  mv1
+                                  (if (has-won? mv2 card)
+                                    mv2
+                                    build))
+                              )]]
+              moves)]
+    (vec (flatten res)))
+  )
 
 (defn take-turn-generic
   [board players card]
@@ -163,7 +232,8 @@
                               (within-one? y ypos)
                               (or (not= x xpos) (not= y ypos))
                               (not (some #(= [(inc x) (inc y)] %) player1))
-                              (not (some #(= [(inc x) (inc y)] %) player2)))]
+                              (not (some #(= [(inc x) (inc y)] %) player2))
+                              (not= [(inc x) (inc y)] (u/get-move-pieceStart move)))]
                (let [move (u/set-move-piecePos move [(inc x) (inc y)])
                      move (u/set-move-hasMovedUp move (u/has-moved-up? move val))
                      move (u/set-move-currentHeight move val)]
@@ -187,7 +257,7 @@
                               (or (not= x xpos) (not= y ypos))
                               (not (some #(= [(inc x) (inc y)] %) player1))
                               (not (some #(= [(inc x) (inc y)] %) player2)))]
-               (let [bld (->Build [(inc x) (inc y)] val)
+               (let [bld (->Build [(inc x) (inc y)] (inc val))
                      move (u/append-build move bld)]
                  move))]
     (vec vals)))
