@@ -77,35 +77,12 @@
 
 (defn create-new-board
   [board move]
-  ;; (println move)
-  ;; (if (< (u/get-move-currentHeight move) 3)
-    ;; (let [build (get (u/get-move-builds move) 0)]
-    ;;   (if (or (nil? build)
-    ;;           (empty? build))
-    ;;     board
     (let [builds (u/get-move-builds move)]
       (if (empty? builds)
         board
         (let [build1 (first builds)
-              build2 (second builds)
-              ;; bpos1 (u/get-build-pos build1)
-              ;; updated (assoc-in board (vec (map dec bpos1))
-              ;;                   (u/get-build-newHeight build1))
-              ]
-          (set-build-in-board (set-build-in-board board build1) build2)
-          ;; (if (nil? build2)
-          ;;     updated
-          ;;     (assoc-in updated (vec (map dec (u/get-build-pos build2)))
-          ;;               (u/get-build-newHeight build2)))
-          
-            ;;  (println build)
-            ;;  (println bpos)
-
-          ;; ]
-          )
-        ))
-    ;; board)
-  )
+              build2 (second builds)]
+          (set-build-in-board (set-build-in-board board build1) build2)))))
 
 (defn set-build-in-board
   [board build]

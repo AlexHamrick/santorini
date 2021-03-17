@@ -85,3 +85,6 @@ clj꞉santorini.core꞉> 
 {"turn":2,"players":[{"card":"Atlas","tokens":[[3,3],[4,1]]},{"card":"Demeter","tokens":[[4,3],[4,4]]}],"spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,1,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]}
 nil
 clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
