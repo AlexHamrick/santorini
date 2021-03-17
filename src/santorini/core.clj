@@ -14,6 +14,7 @@
          pick-move
          compare-moves
          take-turn
+         has-won?
          define-blank-move
          get-valid-moves
          get-valid-builds
@@ -26,7 +27,7 @@
 (defn -main
   []
   ;; Select initial token positions
-  (initial-setup)     
+  (initial-setup)
   ;; Game loop- take in board state and output state after our move
   (while true
     (main-loop)))
@@ -38,8 +39,7 @@
         new-pos (pick-start-pos jmap)
         player-added (create-init-player jmap new-pos)]
     (println (cheshire/generate-string player-added))
-    (flush))
-  )
+    (flush)))
 
 (defn main-loop
   []
@@ -56,8 +56,7 @@
         result (move-to-json move board players turn)
         newjson (cheshire/generate-string result)]
     (println newjson)
-    (flush))
-  )
+    (flush)))
 
 (defn pick-start-pos
   [json]
@@ -71,19 +70,22 @@
 
 (defn create-new-board
   [board move]
-  (if (< (u/get-move-currentHeight move) 3)
+  ;; (if (< (u/get-move-currentHeight move) 3)
     (let [build (get (u/get-move-builds move) 0)]
-       (assoc-in board (vec (map dec (u/get-build-pos build))) 
-                 (inc (u/get-build-newHeight build))))
-    board))
+      (if (nil? build)
+        board
+        (assoc-in board (vec (map dec (u/get-build-pos build)))
+                (inc (u/get-build-newHeight build)))
+        ))
+    ;; board)
+  )
 
 (defn create-init-player
   [players tokens]
   (let [flip-players [(get players 1) (get players 0)]
         second (get flip-players 1)
         adjusted-second (assoc second "tokens" tokens)]
-    (assoc flip-players 1 adjusted-second)
-    ))
+    (assoc flip-players 1 adjusted-second)))
 
 (defn create-new-players
   [players move]
@@ -91,20 +93,23 @@
     (assoc-in flip-players [1 "tokens" (u/get-move-pieceNum move)] (u/get-move-piecePos move))))
 
 (defn pick-move
-  [moves] 
+  [moves]
   (get (vec (sort compare-moves (vec moves))) 0))
 
 (defn compare-moves
   [move1 move2]
   (let [mh1 (u/get-move-currentHeight move1)
         mh2 (u/get-move-currentHeight move2)
-        build1 (:pos (get (u/get-move-builds move1) 0))
-        build2 (:pos (get (u/get-move-builds move2) 0))
+        ;; build1 (:pos (get (u/get-move-builds move1) 0))
+        ;; build2 (:pos (get (u/get-move-builds move2) 0))
         c1 (compare (- 0 mh1) (- 0 mh2))
-        c2 (compare (add-coords build1) (add-coords build2))]
-    (if (zero? c1)
-      c2
-      c1)))
+        ;; c2 (compare (add-coords build1) (add-coords build2))
+        ]
+    ;; (if (zero? c1)
+    ;;   c2
+    ;;   c1)
+    c1
+    ))
 
 (defn take-turn
   [board players card]
@@ -112,7 +117,9 @@
                   :let [start-move (define-blank-move board players pos)
                         moves (for [mv (get-valid-moves board start-move)
                                     build (get-valid-builds board mv)]
-                                build)]]
+                                (if (has-won? mv card)
+                                  mv
+                                  build))]]
               moves)]
     (vec (flatten res))))
 
@@ -151,8 +158,7 @@
                      move (u/set-move-hasMovedUp move (u/has-moved-up? move val))
                      move (u/set-move-currentHeight move val)]
                  move))]
-    (vec vals)
-    ))
+    (vec vals)))
 
 (defn get-valid-builds
   [board move]
@@ -170,12 +176,23 @@
                               (within-one? y ypos)
                               (or (not= x xpos) (not= y ypos))
                               (not (some #(= [(inc x) (inc y)] %) player1))
-                              (not (some #(= [(inc x) (inc y)] %) player2))
-                              )]
+                              (not (some #(= [(inc x) (inc y)] %) player2)))]
                (let [bld (->Build [(inc x) (inc y)] val)
                      move (u/append-build move bld)]
                  move))]
     (vec vals)))
+
+(defn has-won?
+  [move card]
+  (if (and (= (u/get-move-currentHeight move) 3)
+           (u/get-move-hasMovedUp move))
+    true
+    (if (and (= card "Pan")
+             (> 1 (- (u/get-move-startHeight move) (u/get-move-currentHeight move))))
+      true
+      false)
+    )
+  )
 
 (defn within-one?
   [num1 num2]

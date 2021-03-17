@@ -157,3 +157,65 @@ clj꞉santorini.core꞉> 
 ; Evaluating file: core.clj
 #'santorini.core/move-to-json
 clj꞉santorini.core꞉> 
+(def card "Pan")
+#'santorini.core/card
+clj꞉santorini.core꞉> 
+(= card "Pan")
+true
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+(-main)
+[{"card":"Prometheus"},{"card":"Artemis","tokens":[[3,2],[4,4]]}]
+; Execution error (ArityException) at santorini.core/has-won? (core.clj:182).
+; Wrong number of args (0) passed to: santorini.utils/get-move-hasMovedUp
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+(-main)
+[{"card":"Prometheus"},{"card":"Artemis","tokens":[[3,2],[4,4]]}]
+; Execution error (NullPointerException) at santorini.core/add-coords (core.clj:201).
+; Cannot invoke "Object.getClass()" because "x" is null
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+(-main)
+[{"card":"Prometheus"},{"card":"Artemis","tokens":[[3,2],[4,4]]}]
+; Execution error (NullPointerException) at santorini.core/create-new-board (core.clj:76).
+; Cannot invoke "Object.getClass()" because "x" is null
+clj꞉santorini.core꞉> 
+(get [] 0)
+nil
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+(-main)
+[{"card":"Prometheus"},{"card":"Artemis","tokens":[[3,2],[4,4]]}]
+{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Artemis","tokens":[[3,4],[4,4]]}],"spaces":[[0,0,0,0,2],[1,1,2,0,0],[1,0,0,3,0],[0,0,3,0,0],[0,0,0,1,4]]}
+{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Artemis","tokens":[[3,4],[4,4]]}],"spaces":[[0,0,0,0,2],[1,1,2,0,0],[1,0,0,3,0],[0,0,3,2,0],[0,0,0,1,4]]}
+{"turn":19,"players":[{"card":"Prometheus","tokens":[[1,5],[3,4]]},{"card":"Artemis","tokens":[[2,2],[4,4]]}],"spaces":[[1,0,0,0,2],[1,1,2,0,0],[1,0,0,3,0],[0,0,3,0,0],[0,0,0,1,4]]}
+{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Artemis","tokens":[[1,3],[3,4]]}],"spaces":[[0,0,0,0,2],[1,1,3,0,0],[1,0,0,3,0],[0,0,3,0,0],[0,0,0,1,4]]}
+{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Artemis","tokens":[[1,1],[5,4]]}],"spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,3,2]]}
+No input provided.
+; Execution error (NullPointerException) at santorini.core/move-to-json (core.clj:215).
+; Cannot invoke "Object.getClass()" because "x" is null
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
