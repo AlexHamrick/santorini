@@ -20,6 +20,7 @@
          atlas-turn
          hephastus-turn
          demeter-turn
+         prometheus-turn
          nil-or-duplicate-builds?
          has-won?
          define-blank-move
@@ -136,16 +137,16 @@
   [board players card]
   (if (= card "Artemis")
     (artemis-turn board players card)
-    (let [generic (take-turn-generic board players card)]
-      (if (= card "Atlas")
-        (vec (concat generic (atlas-turn generic)))
-        (if (= card "Hephastus")
-          (vec (concat generic (hephastus-turn generic)))
-          (if (= card "Demeter")
-            (vec (concat generic (demeter-turn board generic)))
-            generic)
-         ))
-      ))
+    (if (= card "Prometheus")
+      (prometheus-turn board players card)
+      (let [generic (take-turn-generic board players card)]
+        (if (= card "Atlas")
+          (vec (concat generic (atlas-turn generic)))
+          (if (= card "Hephastus")
+            (vec (concat generic (hephastus-turn generic)))
+            (if (= card "Demeter")
+              (vec (concat generic (demeter-turn board generic)))
+              generic))))))
     ;;if we are none of the specified cards
   )
 
@@ -176,6 +177,7 @@
     (remove nil? (vec new-heights))))
 
 
+
 (defn demeter-turn
   [board moves]
   (let [added-builds (for [mv moves]
@@ -191,6 +193,20 @@
   (if (nil? move)
     true 
     (u/move-has-duplicate-build? move)))
+
+(defn prometheus-turn
+  [board players card]
+  (let [res (for [pos (range 2)
+                  :let [start-move (define-blank-move board players pos card)
+                        moves (for [build1 (conj (get-valid-builds board start-move) start-move)
+                                    mv (get-valid-moves board build1)
+                                    build2 (get-valid-builds board mv)]
+                                (if (has-won? mv card)
+                                  mv
+                                  build2))]]
+              moves)]
+    (vec (flatten res)))
+  )
 
 (defn artemis-turn 
   [board players card]
@@ -247,7 +263,7 @@
         level (get-in board [xpos ypos])
         vals (for [[x row] (map-indexed vector board)
                    [y val] (map-indexed vector row)
-                   :when (and (movable-height? level val)
+                   :when (and (movable-height? level val move)
                               (within-one? x xpos)
                               (within-one? y ypos)
                               (or (not= x xpos) (not= y ypos))
@@ -299,8 +315,14 @@
   (not (> (Math/abs (- num1 num2)) 1)))
 
 (defn movable-height?
-  [level target]
-  (<= (- target level) 1))
+  [level target move]
+  (let [builds (u/get-move-builds move)
+        can-reach (<= (- target level) 1)]
+    (if (empty? builds)
+      can-reach
+      (and can-reach (<= target (u/get-move-currentHeight move))))
+    ))
+  
 
 (defn add-coords
   [coord]
