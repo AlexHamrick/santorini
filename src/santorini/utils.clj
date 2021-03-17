@@ -6,7 +6,8 @@
                  startHeight
                  currentHeight
                  hasMovedUp
-                 builds])
+                 builds
+                 card])
 
 (defrecord Build [pos
                   newHeight])
@@ -38,6 +39,10 @@
 (defn get-move-hasMovedUp
   [move]
   (:hasMovedUp move))
+
+(defn get-move-card
+  [move]
+  (:card move))
 
 (defn get-move-builds
   [move]
@@ -78,6 +83,10 @@
 (defn set-move-builds
   [move pieces]
   (assoc move :builds pieces))
+
+(defn set-move-card
+  [move card]
+  (assoc move :card card))
 
 (defn append-build
   [move build]

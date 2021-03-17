@@ -100,21 +100,28 @@
   [move1 move2]
   (let [mh1 (u/get-move-currentHeight move1)
         mh2 (u/get-move-currentHeight move2)
+        win1 (has-won? move1 (u/get-move-card move1))
+        win2 (has-won? move2 (u/get-move-card move2))
         ;; build1 (:pos (get (u/get-move-builds move1) 0))
         ;; build2 (:pos (get (u/get-move-builds move2) 0))
         c1 (compare (- 0 mh1) (- 0 mh2))
         ;; c2 (compare (add-coords build1) (add-coords build2))
         ]
+    (if (= win1 win2)
+      c1
+      (if win1
+        -1
+        1))
     ;; (if (zero? c1)
     ;;   c2
     ;;   c1)
-    c1
+    ;; c1
     ))
 
 (defn take-turn
   [board players card]
   (let [res (for [pos (range 2)
-                  :let [start-move (define-blank-move board players pos)
+                  :let [start-move (define-blank-move board players pos card)
                         moves (for [mv (get-valid-moves board start-move)
                                     build (get-valid-builds board mv)]
                                 (if (has-won? mv card)
@@ -124,7 +131,7 @@
     (vec (flatten res))))
 
 (defn define-blank-move
-  [board players piece-num]
+  [board players piece-num card]
   (let [moving-piece (get-in players [0 piece-num])
         adj-pos (map dec moving-piece)
         height (get-in board adj-pos)]
@@ -134,7 +141,8 @@
             height
             height
             false
-            [])))
+            []
+            card)))
 
 (defn get-valid-moves
   [board move]
@@ -188,7 +196,7 @@
            (u/get-move-hasMovedUp move))
     true
     (if (and (= card "Pan")
-             (> 1 (- (u/get-move-startHeight move) (u/get-move-currentHeight move))))
+             (< 1 (- (u/get-move-startHeight move) (u/get-move-currentHeight move))))
       true
       false)
     )

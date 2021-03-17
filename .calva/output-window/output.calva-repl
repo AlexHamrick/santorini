@@ -5,7 +5,13 @@
 ; Happy coding! ♥️
 
 ; Jacking in...
+No input provided.
+; Execution error (NullPointerException) at santorini.core/move-to-json (core.clj:223).
+; Cannot invoke "Object.getClass()" because "x" is null
+clj꞉santorini.core꞉> 
+; nREPL Connection was closed
 ; Starting Jack-in Terminal: cmd.exe /d /c lein update-in :dependencies conj [nrepl,"0.8.3"] -- update-in :plugins conj [cider/cider-nrepl,"0.25.8"] -- update-in [:repl-options,:nrepl-middleware] conj '["cider.nrepl/cider-middleware"]' -- repl :headless
+(-main)
 ; Hooking up nREPL sessions...
 ; Connected session: clj
 ; TIPS: 
@@ -20,202 +26,68 @@ clj꞉santorini.core꞉> 
 clj꞉santorini.core꞉> 
 (-main)
 [{"card":"Artemis","tokens":[[2,3],[4,4]]},{"card":"Prometheus","tokens":[[3,2],[4,3]]}]
-; Execution error (IllegalStateException) at santorini.core/create-new-players (core.clj:159).
-; Attempting to call unbound fn: #'santorini.core/get-selected-token
-clj꞉santorini.core꞉> 
-(main-loop)
-; Execution error (IllegalStateException) at santorini.core/create-new-players (core.clj:159).
-; Attempting to call unbound fn: #'santorini.core/get-selected-token
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-(main-loop)
-; Execution error (IllegalStateException) at santorini.core/create-new-board (core.clj:143).
-; Attempting to call unbound fn: #'santorini.core/get-move-height
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-bld1
-; Syntax error compiling at (c:\Users\Alex\FunctionalProgramming\santorini\.calva\output-window\output.calva-repl:1:7962).
-; Unable to resolve symbol: bld1 in this context
-clj꞉santorini.core꞉> 
-Build
-santorini.core.Build
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-Build
-santorini.core.Build
-clj꞉santorini.core꞉> 
-(main-loop)
-{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Artemis","tokens":[[3,4],[4,4]]}],"spaces":[[0,0,0,0,2],[1,1,2,0,0],[1,0,0,3,0],[0,0,3,0,0],[0,0,0,1,4]]}
-nil
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-; Evaluating file: records.clj
-nil
-clj꞉santorini.records꞉> 
-; Evaluating file: records.clj
-santorini.records.Build
-clj꞉santorini.records꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-; Evaluating file: utils.clj
-#'utils/get-cards-from-map
-clj꞉utils꞉> 
-; Evaluating file: utils.clj
-#'utils/get-cards-from-map
-clj꞉utils꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-; Evaluating file: utils.clj
-#'utils/get-cards-from-map
-clj꞉utils꞉> 
-; Evaluating file: core.clj
-; Syntax error compiling at (C:\Users\Alex\FunctionalProgramming\santorini\src\santorini\core.clj:1:1).
-; namespace 'santorini.utils' not found after loading '/santorini/utils'
-; Evaluation of file core.clj failed: class clojure.lang.Compiler$CompilerException
-
-clj꞉utils꞉> 
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-; Syntax error compiling at (C:\Users\Alex\FunctionalProgramming\santorini\src\santorini\core.clj:1:1).
-; namespace 'santorini.utils' not found after loading '/santorini/utils'
-; Evaluation of file core.clj failed: class clojure.lang.Compiler$CompilerException
-
-clj꞉santorini.core꞉> 
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-; Syntax error compiling at (C:\Users\Alex\FunctionalProgramming\santorini\src\santorini\core.clj:1:1).
-; namespace 'santorini.utils' not found
-; Evaluation of file core.clj failed: class clojure.lang.Compiler$CompilerException
-
-clj꞉santorini.core꞉> 
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-; Syntax error compiling at (C:\Users\Alex\FunctionalProgramming\santorini\src\santorini\core.clj:1:1).
-; namespace 'santorini.utils' not found
-; Evaluation of file core.clj failed: class clojure.lang.Compiler$CompilerException
-
-clj꞉santorini.core꞉> 
+{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Pan","tokens":[[2,3],[5,4]]}],"spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,3,2]]}
+{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Pan","tokens":[[2,3],[4,5]]}],"spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,2],[0,0,0,2,2]]}
+{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Demeter","tokens":[[2,3],[5,4]]}],"spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,1,0,0],[0,0,0,2,2]]}
+{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Pan","tokens":[[2,3],[4,5]]}],"spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,2],[0,0,0,2,2]]}
+No input provided.
+; Execution error (NullPointerException) at santorini.core/move-to-json (core.clj:223).
+; Cannot invoke "Object.getClass()" because "x" is null
 clj꞉santorini.core꞉> 
 (-main)
 [{"card":"Prometheus"},{"card":"Artemis","tokens":[[3,2],[4,4]]}]
-{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Artemis","tokens":[[3,4],[4,4]]}],"spaces":[[0,0,0,0,2],[1,1,2,0,0],[1,0,0,3,0],[0,0,3,0,0],[0,0,0,1,4]]}
-; Evaluating file: core.clj
-; Evaluating file: core.clj
-; Evaluating file: core.clj
-; Evaluating file: core.clj
-; Evaluating file: utils.clj
+{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,2]]},{"card":"Pan","tokens":[[1,2],[5,5]]}],"spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,2]]}
 No input provided.
-; Execution error (NullPointerException) at santorini.core/move-to-json (core.clj:371).
+; Execution error (NullPointerException) at santorini.core/move-to-json (core.clj:223).
 ; Cannot invoke "Object.getClass()" because "x" is null
 clj꞉santorini.core꞉> 
-; Syntax error (IllegalAccessError) compiling at (C:\Users\Alex\FunctionalProgramming\santorini\src\santorini\core.clj:1:1).
-; ->Move does not exist
-; Evaluation of file core.clj failed: class clojure.lang.Compiler$CompilerException
-
+(def board [[0 0 0 0 0]
+            [0 0 0 0 0]
+            [0 0 0 0 0]
+            [0 0 0 0 0]
+            [0 0 0 2 2]])
+#'santorini.core/board
 clj꞉santorini.core꞉> 
+(def players [[[2 1][5 5]][[1 1][3 2]]])
+#'santorini.core/players
 clj꞉santorini.core꞉> 
-#'santorini.utils/get-cards-from-map
-clj꞉santorini.utils꞉> 
-; Syntax error (IllegalStateException) compiling at (C:\Users\Alex\FunctionalProgramming\santorini\src\santorini\core.clj:1:1).
-; Alias u already exists in namespace santorini.core, aliasing santorini.utils
-; Evaluation of file core.clj failed: class clojure.lang.Compiler$CompilerException
-
-clj꞉santorini.utils꞉> 
+(def define-blank-move board players 1 "Pan")
+; Syntax error compiling def at (c:\Users\Alex\FunctionalProgramming\santorini\.calva\output-window\output.calva-repl:54:1).
+; Too many arguments to def
 clj꞉santorini.core꞉> 
-#'santorini.core/move-to-json
+(def mv (define-blank-move board players 1 "Pan"))
+#'santorini.core/mv
 clj꞉santorini.core꞉> 
-#'santorini.core/move-to-json
+mv
+{:pieces [[[2 1] [5 5]] [[1 1] [3 2]]],
+ :pieceNum 1,
+ :pieceStart [5 5],
+ :startHeight 2,
+ :currentHeight 2,
+ :hasMovedUp false,
+ :builds [],
+ :card "Pan"}
 clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
+(has-won? mv)
+; Execution error (ArityException) at santorini.core/eval7134 (form-init15921563236761138194.clj:71).
+; Wrong number of args (1) passed to: santorini.core/has-won?
 clj꞉santorini.core꞉> 
-(def card "Pan")
-#'santorini.core/card
-clj꞉santorini.core꞉> 
-(= card "Pan")
+(has-won? mv (:card mv))
 true
 clj꞉santorini.core꞉> 
 ; Evaluating file: core.clj
 #'santorini.core/move-to-json
 clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
+(has-won? mv (:card mv))
+false
 clj꞉santorini.core꞉> 
 (-main)
 [{"card":"Prometheus"},{"card":"Artemis","tokens":[[3,2],[4,4]]}]
-; Execution error (ArityException) at santorini.core/has-won? (core.clj:182).
-; Wrong number of args (0) passed to: santorini.utils/get-move-hasMovedUp
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-(-main)
-[{"card":"Prometheus"},{"card":"Artemis","tokens":[[3,2],[4,4]]}]
-; Execution error (NullPointerException) at santorini.core/add-coords (core.clj:201).
-; Cannot invoke "Object.getClass()" because "x" is null
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-(-main)
-[{"card":"Prometheus"},{"card":"Artemis","tokens":[[3,2],[4,4]]}]
-; Execution error (NullPointerException) at santorini.core/create-new-board (core.clj:76).
-; Cannot invoke "Object.getClass()" because "x" is null
-clj꞉santorini.core꞉> 
-(get [] 0)
-nil
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
-clj꞉santorini.core꞉> 
-(-main)
-[{"card":"Prometheus"},{"card":"Artemis","tokens":[[3,2],[4,4]]}]
-{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Artemis","tokens":[[3,4],[4,4]]}],"spaces":[[0,0,0,0,2],[1,1,2,0,0],[1,0,0,3,0],[0,0,3,0,0],[0,0,0,1,4]]}
-{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Artemis","tokens":[[3,4],[4,4]]}],"spaces":[[0,0,0,0,2],[1,1,2,0,0],[1,0,0,3,0],[0,0,3,2,0],[0,0,0,1,4]]}
-{"turn":19,"players":[{"card":"Prometheus","tokens":[[1,5],[3,4]]},{"card":"Artemis","tokens":[[2,2],[4,4]]}],"spaces":[[1,0,0,0,2],[1,1,2,0,0],[1,0,0,3,0],[0,0,3,0,0],[0,0,0,1,4]]}
-{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Artemis","tokens":[[1,3],[3,4]]}],"spaces":[[0,0,0,0,2],[1,1,3,0,0],[1,0,0,3,0],[0,0,3,0,0],[0,0,0,1,4]]}
-{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Artemis","tokens":[[1,1],[5,4]]}],"spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,3,2]]}
+{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Pan","tokens":[[2,3],[5,4]]}],"spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,3,2]]}
+{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Pan","tokens":[[2,3],[4,4]]}],"spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,2,2]]}
+{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Pan","tokens":[[2,3],[4,5]]}],"spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,2,2,0],[0,0,2,2,2]]}
+{"turn":19,"players":[{"card":"Prometheus","tokens":[[2,5],[3,5]]},{"card":"Pan","tokens":[[2,3],[5,4]]}],"spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,2,1,1],[0,0,2,2,2]]}
 No input provided.
-; Execution error (NullPointerException) at santorini.core/move-to-json (core.clj:215).
+; Execution error (NullPointerException) at santorini.core/move-to-json (core.clj:223).
 ; Cannot invoke "Object.getClass()" because "x" is null
-clj꞉santorini.core꞉> 
-; Evaluating file: core.clj
-#'santorini.core/move-to-json
 clj꞉santorini.core꞉> 
