@@ -1,5 +1,18 @@
 (ns santorini.utils)
 
+;; Defines a Move record. The purpose of this record
+;; is to keep track of all of the information regarding
+;; a particular move
+;; 
+;; pieces: a 2 dimensional array of players,
+;;   it holds the positions of all 4 tokens
+;; pieceNum: the index of the piece that we are currently moving
+;; pieceStart: the position which the piece started in
+;; startHeight: the starting height of the piece
+;; currentHeight: the height of the piece in its current position
+;; hasMovedUp: keeps track of whether we have moved to a higher level than we started
+;; builds: an array of builds representing the builds we have made so far
+;; card: a string representing the god card
 (defrecord Move [pieces
                  pieceNum
                  pieceStart
@@ -9,6 +22,12 @@
                  builds
                  card])
 
+;; A build record keeps track of the position on the board which we want to build
+;; on as well as the new height of that position (after building)
+;; 
+;; pos: an array of 2 numbers representing the position on the board where 
+;;   we are building
+;; newHeight: the height of the new build
 (defrecord Build [pos
                   newHeight])
 
@@ -105,8 +124,7 @@
   (let [builds (get-move-builds move)]
     (if (< (count builds) 2)
       false
-      (= (get-build-pos (first builds)) (get-build-pos (second builds)))))
-  )
+      (= (get-build-pos (first builds)) (get-build-pos (second builds))))))
 
 (defn update-players
   [players pos newloc]
@@ -122,8 +140,6 @@
 (defn has-moved-up?
   [move new-height]
   (or (get-move-hasMovedUp move) (> new-height (get-move-currentHeight move))))
-
-
 
 (defn get-board-from-map
   [json-map]

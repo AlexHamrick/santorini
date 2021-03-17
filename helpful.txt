@@ -37,3 +37,12 @@
    {"players":[{"card":"Demeter","tokens":[[3,2],[4,4]]},{"card":"Atlas","tokens":[[3,3],[4,1]]}],"spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],"style":{"players":["play-random","runable.sh"]},"turn":1}
 
    {"players":[{"card":"Prometheus","tokens":[[3,2],[4,4]]},{"card":"Atlas","tokens":[[3,3],[4,1]]}],"spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,1]],"style":{"players":["play-random","runable.sh"]},"turn":1}
+
+
+;; Forcing apollo move
+
+{"players":[{"card":"Apollo","tokens":[[4,4],[5,1]]},{"card":"Demeter","tokens":[[3,4],[5,3]]}],"spaces":[[1,2,3,1,0],[0,1,4,2,4],[1,4,3,1,4],[3,2,4,1,4],[0,4,1,4,3]],"style":{"players":["runable.sh","play-random"]},"turn":42}
+
+;;incorrect artemis
+
+{"players":[{"card":"Artemis","tokens":[[1,5],[5,1]]},{"card":"Minotaur","tokens":[[3,5],[4,3]]}],"spaces":[[2,0,2,3,0],[2,1,1,3,4],[2,3,4,1,1],[4,0,2,4,3],[1,3,2,2,1]],"style":{"players":["play-random","runable.sh"]},"turn":51}
