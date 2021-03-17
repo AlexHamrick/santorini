@@ -32,3 +32,7 @@
 
 
 [{"card":"Demeter"},{"card":"Hephastus"}]
+
+
+   {"players":[{"card":"Demeter","tokens":[[3,2],[4,4]]},{"card":"Atlas","tokens":[[3,3],[4,1]]}],"spaces":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],"style":{"players":["play-random","runable.sh"]},"turn":1}
+

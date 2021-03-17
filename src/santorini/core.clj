@@ -9,6 +9,7 @@
          main-loop
          pick-start-pos
          create-new-board
+         set-build-in-board
          create-init-player
          create-new-players
          pick-move
@@ -18,6 +19,8 @@
          artemis-turn
          atlas-turn
          hephastus-turn
+         demeter-turn
+         nil-or-duplicate-builds?
          has-won?
          define-blank-move
          get-valid-moves
@@ -74,22 +77,42 @@
 
 (defn create-new-board
   [board move]
+  ;; (println move)
   ;; (if (< (u/get-move-currentHeight move) 3)
-    (let [build (get (u/get-move-builds move) 0)]
-      (if (or (nil? build)
-              (empty? build))
+    ;; (let [build (get (u/get-move-builds move) 0)]
+    ;;   (if (or (nil? build)
+    ;;           (empty? build))
+    ;;     board
+    (let [builds (u/get-move-builds move)]
+      (if (empty? builds)
         board
-        (let [bpos (u/get-build-pos build)] 
-          (println move)
-             (println build)
-             (println bpos)
-             (assoc-in board (vec (map dec bpos))
-                       (u/get-build-newHeight build))
+        (let [build1 (first builds)
+              build2 (second builds)
+              ;; bpos1 (u/get-build-pos build1)
+              ;; updated (assoc-in board (vec (map dec bpos1))
+              ;;                   (u/get-build-newHeight build1))
+              ]
+          (set-build-in-board (set-build-in-board board build1) build2)
+          ;; (if (nil? build2)
+          ;;     updated
+          ;;     (assoc-in updated (vec (map dec (u/get-build-pos build2)))
+          ;;               (u/get-build-newHeight build2)))
+          
+            ;;  (println build)
+            ;;  (println bpos)
+
           ;; ]
-             )
+          )
         ))
     ;; board)
   )
+
+(defn set-build-in-board
+  [board build]
+  (if (nil? build)
+    board
+    (assoc-in board (vec (map dec (u/get-build-pos build)))
+              (u/get-build-newHeight build))))
 
 (defn create-init-player
   [players tokens]
@@ -105,6 +128,7 @@
 
 (defn pick-move
   [moves]
+  ;; (println moves)
   (rand-nth (vec (sort compare-moves (vec moves)))))
   ;; (get (vec (sort compare-moves (vec moves))) 0))
 
@@ -140,7 +164,10 @@
         (vec (concat generic (atlas-turn generic)))
         (if (= card "Hephastus")
           (vec (concat generic (hephastus-turn generic)))
-          generic))
+          (if (= card "Demeter")
+            (vec (concat generic (demeter-turn board generic)))
+            generic)
+         ))
       ))
     ;;if we are none of the specified cards
   )
@@ -171,6 +198,22 @@
                           ))))]
     (remove nil? (vec new-heights))))
 
+
+(defn demeter-turn
+  [board moves]
+  (let [added-builds (for [mv moves]
+                       (let [builds (u/get-move-builds mv)]
+                         (when (seq builds)
+                           (get-valid-builds board mv))))]
+    (remove nil-or-duplicate-builds? (flatten added-builds))
+    )
+  )
+
+(defn nil-or-duplicate-builds?
+  [move]
+  (if (nil? move)
+    true 
+    (u/move-has-duplicate-build? move)))
 
 (defn artemis-turn 
   [board players card]

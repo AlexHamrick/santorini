@@ -100,6 +100,14 @@
   [move build]
   (set-move-builds move (conj (get-move-builds move) build)))
 
+(defn move-has-duplicate-build?
+  [move]
+  (let [builds (get-move-builds move)]
+    (if (< (count builds) 2)
+      false
+      (= (get-build-pos (first builds)) (get-build-pos (second builds)))))
+  )
+
 (defn update-players
   [players pos newloc]
   (assoc-in players [0 pos] newloc))
