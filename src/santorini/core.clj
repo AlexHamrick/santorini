@@ -133,9 +133,9 @@
 ;; Currently, we sort based on compare-moves and select the first element.
 (defn pick-move
   [moves]
-  ;; Uncomment to try random moves and ensure we aren't doing anything funny with moves that aren't taken
-  ;; (rand-nth (vec (sort compare-moves moves))))
-  (first (vec (sort compare-moves moves))))
+  (let [sorted-moves (vec (sort compare-moves moves))]
+    (first sorted-moves))
+  )
 
 ;; Determines which move is best between two
 ;; Currently, we just take the move which wins, otherwise we prioritize
@@ -301,7 +301,7 @@
                    [x row] (map-indexed vector board)
                    [y val] (map-indexed vector row)
                    ;; checks for valid moves
-                   :when (and (movable-height? level val move)
+                   :when (and (movable-height? level val move [(inc x) (inc y)])
                               (within-one? x xpos)
                               (within-one? y ypos)
                               (or (not= x xpos) (not= y ypos))
@@ -364,13 +364,18 @@
 
 ;; Checks whether the height of target is reachable from level with a given move
 (defn movable-height?
-  [level target move]
+  [level target move move-pos]
   (let [builds (u/get-move-builds move)
         can-reach (<= (- target level) 1)]
     ;; some logic for prometheus- don't allow moving up if we have already built
     (if (empty? builds)
       can-reach
-      (and can-reach (<= target (u/get-move-currentHeight move))))))
+      (and can-reach 
+           (<= target level)
+           (if (= move-pos (u/get-build-pos (first builds)))
+             (<= (u/get-build-newHeight (first builds)) level)
+             true)
+           ))))
 
 ;; adds two coordinates in an array of 2 digits together
 (defn add-coords

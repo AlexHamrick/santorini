@@ -5,7 +5,6 @@
 ; Happy coding! ♥️
 
 ; Jacking in...
-; nREPL Connection was closed
 ; Starting Jack-in Terminal: cmd.exe /d /c lein update-in :dependencies conj [nrepl,"0.8.3"] -- update-in :plugins conj [cider/cider-nrepl,"0.25.8"] -- update-in [:repl-options,:nrepl-middleware] conj '["cider.nrepl/cider-middleware"]' -- repl :headless
 ; Hooking up nREPL sessions...
 ; Connected session: clj
@@ -16,6 +15,214 @@
 ;   - `alt+up` and `alt+down` traverse up and down the REPL command history
 ;      when the cursor is after the last contents at the prompt
 ;   - Clojure lines in stack traces are peekable and clickable.
-clj꞉santorini.core꞉> 
+clj꞉santorini.core꞉>  ; Use `alt+enter` to evaluate
 ; Jack-in done.
+clj꞉santorini.core꞉> 
+(def board [[2 2 2 2 2]
+            [2 2 2 2 2]
+            [2 0 1 2 2]
+            [2 2 2 2 2]
+            [2 2 2 2 2]])
+#'santorini.core/board
+clj꞉santorini.core꞉> 
+(def players [[[3 3][0 0]][[5 5][4 5]]])
+#'santorini.core/players
+clj꞉santorini.core꞉> 
+(def mv (->Move players 0 [3 3] 1 1 false [] "Prometheus"))
+#'santorini.core/mv
+clj꞉santorini.core꞉> 
+(def mv-build1 (->Move players 0 [3 3] 1 1 false [(->Build [3 4] 3)] "Prometheus"))
+#'santorini.core/mv-build1
+clj꞉santorini.core꞉> 
+(def mv-build2 (->Move players 0 [3 3] 1 1 false [(->Build [3 2] 3)] "Prometheus"))
+#'santorini.core/mv-build2
+clj꞉santorini.core꞉> 
+(get-valid-moves board mv)
+[{:pieces [[[2 2] [0 0]] [[5 5] [4 5]]],
+  :pieceNum 0,
+  :pieceStart [3 3],
+  :startHeight 1,
+  :currentHeight 2,
+  :hasMovedUp true,
+  :builds [],
+  :card "Prometheus"}
+ {:pieces [[[2 3] [0 0]] [[5 5] [4 5]]],
+  :pieceNum 0,
+  :pieceStart [3 3],
+  :startHeight 1,
+  :currentHeight 2,
+  :hasMovedUp true,
+  :builds [],
+  :card "Prometheus"}
+ {:pieces [[[2 4] [0 0]] [[5 5] [4 5]]],
+  :pieceNum 0,
+  :pieceStart [3 3],
+  :startHeight 1,
+  :currentHeight 2,
+  :hasMovedUp true,
+  :builds [],
+  :card "Prometheus"}
+ {:pieces [[[3 2] [0 0]] [[5 5] [4 5]]],
+  :pieceNum 0,
+  :pieceStart [3 3],
+  :startHeight 1,
+  :currentHeight 0,
+  :hasMovedUp false,
+  :builds [],
+  :card "Prometheus"}
+ {:pieces [[[3 4] [0 0]] [[5 5] [4 5]]],
+  :pieceNum 0,
+  :pieceStart [3 3],
+  :startHeight 1,
+  :currentHeight 2,
+  :hasMovedUp true,
+  :builds [],
+  :card "Prometheus"}
+ {:pieces [[[4 2] [0 0]] [[5 5] [4 5]]],
+  :pieceNum 0,
+  :pieceStart [3 3],
+  :startHeight 1,
+  :currentHeight 2,
+  :hasMovedUp true,
+  :builds [],
+  :card "Prometheus"}
+ {:pieces [[[4 3] [0 0]] [[5 5] [4 5]]],
+  :pieceNum 0,
+  :pieceStart [3 3],
+  :startHeight 1,
+  :currentHeight 2,
+  :hasMovedUp true,
+  :builds [],
+  :card "Prometheus"}
+ {:pieces [[[4 4] [0 0]] [[5 5] [4 5]]],
+  :pieceNum 0,
+  :pieceStart [3 3],
+  :startHeight 1,
+  :currentHeight 2,
+  :hasMovedUp true,
+  :builds [],
+  :card "Prometheus"}]
+clj꞉santorini.core꞉> 
+(get-valid-moves board mv-build1)
+[{:pieces [[[3 2] [0 0]] [[5 5] [4 5]]],
+  :pieceNum 0,
+  :pieceStart [3 3],
+  :startHeight 1,
+  :currentHeight 0,
+  :hasMovedUp false,
+  :builds [{:pos [3 4], :newHeight 3}],
+  :card "Prometheus"}]
+clj꞉santorini.core꞉> 
+(get-valid-moves board mv-build2)
+[{:pieces [[[3 2] [0 0]] [[5 5] [4 5]]],
+  :pieceNum 0,
+  :pieceStart [3 3],
+  :startHeight 1,
+  :currentHeight 0,
+  :hasMovedUp false,
+  :builds [{:pos [3 2], :newHeight 3}],
+  :card "Prometheus"}]
+clj꞉santorini.core꞉> 
+(main-loop)
+{"turn":1,"players":[{"card":"Minotaur","tokens":[[1,5],[4,5]]},{"card":"Prometheus","tokens":[[2,1],[4,4]]}],"spaces":[[1,0,0,0,0],[1,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]}
+nil
+clj꞉santorini.core꞉> 
+(def board-e [[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]])
+#'santorini.core/board-e
+clj꞉santorini.core꞉> 
+(def mv-build2 (->Move [[[3 2] [4 4]][[1 5][4 5]]] 0 [3 3] 1 1 false [(->Build [3 2] 3)] "Prometheus"))
+#'santorini.core/mv-build2
+clj꞉santorini.core꞉> 
+(get-valid-moves board mv-build2)
+[]
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+(main-loop)
+(#santorini.utils.Move{:pieces [[[2 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[2 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[2 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, 
+:hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 1], :newHeight 1}], :card Prometheus})
+(#santorini.utils.Move{:pieces [[[2 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 2], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[2 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 2], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[2 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 2], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 2], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, 
+:hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 2], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 2], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 2], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 2], :newHeight 1}], :card Prometheus})
+(#santorini.utils.Move{:pieces [[[2 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[2 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[2 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, 
+:hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 3], :newHeight 1}], :card Prometheus})
+(#santorini.utils.Move{:pieces [[[2 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[2 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[2 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, 
+:hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 1], :newHeight 1}], :card Prometheus})
+(#santorini.utils.Move{:pieces [[[2 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[2 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[2 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, 
+:hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 3], :newHeight 1}], :card Prometheus})
+(#santorini.utils.Move{:pieces [[[2 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[2 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[2 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, 
+:hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 1], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 1], :newHeight 1}], :card Prometheus})
+(#santorini.utils.Move{:pieces [[[2 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 2], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[2 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 2], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[2 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 2], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 2], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, 
+:hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 2], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 2], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 2], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 2], :newHeight 1}], :card Prometheus})
+(#santorini.utils.Move{:pieces [[[2 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[2 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[2 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, 
+:hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[4 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 3], :newHeight 1}], :card Prometheus})
+(#santorini.utils.Move{:pieces [[[2 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [], :card Prometheus} #santorini.utils.Move{:pieces [[[2 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [], :card Prometheus} #santorini.utils.Move{:pieces [[[2 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [], :card Prometheus} #santorini.utils.Move{:pieces [[[3 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [], :card Prometheus} #santorini.utils.Move{:pieces [[[3 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [], :card Prometheus} #santorini.utils.Move{:pieces [[[4 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp fals
+e, :builds [], :card Prometheus} #santorini.utils.Move{:pieces [[[4 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [], :card Prometheus} #santorini.utils.Move{:pieces [[[4 3] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [], :card Prometheus})
+(#santorini.utils.Move{:pieces [[[3 2] [3 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [3 4]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [3 5]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [4 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, 
+:hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 4]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 5]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 3], :newHeight 1}], :card Prometheus})
+(#santorini.utils.Move{:pieces [[[3 2] [3 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 4], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [3 4]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 4], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [3 5]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 4], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [4 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 4], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, 
+:hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 4], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 4]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 4], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 5]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 4], :newHeight 1}], :card Prometheus})
+(#santorini.utils.Move{:pieces [[[3 2] [3 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 5], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [3 4]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 5], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [3 5]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 5], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [4 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 5], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, 
+:hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 5], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 4]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 5], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 5]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [3 5], :newHeight 1}], :card Prometheus})
+(#santorini.utils.Move{:pieces [[[3 2] [3 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [3 4]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [3 5]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [4 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, 
+:hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 4]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 5]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [4 3], :newHeight 1}], :card Prometheus})
+(#santorini.utils.Move{:pieces [[[3 2] [3 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [3 4]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [3 5]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [4 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, 
+:hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 4]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 3], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 5]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 3], :newHeight 1}], :card Prometheus})
+(#santorini.utils.Move{:pieces [[[3 2] [3 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 4], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [3 4]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 4], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [3 5]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 4], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [4 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 4], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, 
+:hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 4], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 4]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 4], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 5]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 4], :newHeight 1}], :card Prometheus})
+(#santorini.utils.Move{:pieces [[[3 2] [3 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 5], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [3 4]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 5], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [3 5]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 5], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [4 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 5], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, 
+:hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 5], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 4]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 5], :newHeight 1}], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 5]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [5 5], :newHeight 1}], :card Prometheus})
+(#santorini.utils.Move{:pieces [[[3 2] [3 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [3 4]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [3 5]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [4 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 3]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 4]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp fals
+e, :builds [], :card Prometheus} #santorini.utils.Move{:pieces [[[3 2] [5 5]] [[1 5] [4 5]]], :pieceNum 1, :pieceStart [4 4], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [], :card Prometheus})
+{"turn":1,"players":[{"card":"Minotaur","tokens":[[1,5],[4,5]]},{"card":"Prometheus","tokens":[[2,1],[4,4]]}],"spaces":[[1,0,0,0,0],[1,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]}
+nil
+clj꞉santorini.core꞉> 
+(def mv-build2 (->Move [[[3 2] [4 4]][[1 5][4 5]]] 0 [3 2] 0 0 false [(->Build [2 1] 1)] "Prometheus"))
+#'santorini.core/mv-build2
+clj꞉santorini.core꞉> 
+(get-valid-moves board mv-build2)
+()
+[]
+clj꞉santorini.core꞉> 
+#'santorini.core/mv-build2
+clj꞉santorini.core꞉> 
+(get-valid-moves board mv-build2)
+()
+[]
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+(main-loop)
+{"turn":1,"players":[{"card":"Minotaur","tokens":[[1,5],[4,5]]},{"card":"Prometheus","tokens":[[2,1],[4,4]]}],"spaces":[[1,0,0,0,0],[1,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]}
+nil
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+(main-loop)
+{"turn":1,"players":[{"card":"Minotaur","tokens":[[1,5],[4,5]]},{"card":"Prometheus","tokens":[[2,1],[4,4]]}],"spaces":[[1,0,0,0,0],[1,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]}
+nil
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+(main-loop)
+#santorini.utils.Move{:pieces [[[2 1] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 1], :newHeight 1} #santorini.utils.Build{:pos [1 1], :newHeight 1}], :card Prometheus}
+{"turn":1,"players":[{"card":"Minotaur","tokens":[[1,5],[4,5]]},{"card":"Prometheus","tokens":[[2,1],[4,4]]}],"spaces":[[1,0,0,0,0],[1,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]}
+nil
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
+clj꞉santorini.core꞉> 
+(main-loop)
+#santorini.utils.Move{:pieces [[[2 2] [4 4]] [[1 5] [4 5]]], :pieceNum 0, :pieceStart [3 2], :startHeight 0, :currentHeight 0, :hasMovedUp false, :builds [#santorini.utils.Build{:pos [2 1], :newHeight 1} #santorini.utils.Build{:pos [1 1], :newHeight 1}], :card Prometheus}
+{"turn":1,"players":[{"card":"Minotaur","tokens":[[1,5],[4,5]]},{"card":"Prometheus","tokens":[[2,2],[4,4]]}],"spaces":[[1,0,0,0,0],[1,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]}
+nil
+clj꞉santorini.core꞉> 
+; Evaluating file: core.clj
+#'santorini.core/move-to-json
 clj꞉santorini.core꞉> 
